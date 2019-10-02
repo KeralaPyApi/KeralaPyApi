@@ -314,7 +314,7 @@ file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN,
 All `send_xyz` functions of TeleBot take an optional `reply_markup` argument. This argument must be an instance of `ReplyKeyboardMarkup`, `ReplyKeyboardRemove` or `ForceReply`, which are defined in types.py.
 
 ```python
-from telebot import types
+from keralasbot import types
 
 # Using the ReplyKeyboardMarkup class
 # It's constructor can take the following optional arguments:
