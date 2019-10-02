@@ -1,9 +1,6 @@
-# <p align="center">KBPYTHON
+# <p align="center">KeralaPyApi
 
 <p align="center">A simple, but extensible Python implementation for the <a href="https://core.telegram.org/bots/api">Telegram Bot API</a>.
-
-[![Download Month](https://img.shields.io/pypi/v/pyTelegramBotAPI.svg)](https://pypi.python.org/pypi/pyTelegramBotAPI)
-[![Build Status](https://travis-ci.org/eternnoir/pyTelegramBotAPI.svg?branch=master)](https://travis-ci.org/eternnoir/pyTelegramBotAPI)
 
   * [Getting started.](#getting-started)
   * [Writing your first bot](#writing-your-first-bot)
@@ -15,7 +12,7 @@
     * [General use of the API](#general-use-of-the-api)
       * [Message handlers](#message-handlers)
       * [Callback Query handlers](#callback-query-handler)
-      * [TeleBot](#telebot)
+      * [KeralasBot](#keralabot)
       * [Reply markup](#reply-markup)
       * [Inline Mode](#inline-mode)
   * [Advanced use of the API](#advanced-use-of-the-api)
@@ -42,13 +39,13 @@ There are two ways to install the library:
 * Installation using pip (a Python package manager)*:
 
 ```
-$ pip install pyTelegramBotAPI
+$ pip install KeralaPyApi
 ```
 * Installation from source (requires git):
 
 ```
-$ git clone https://github.com/eternnoir/pyTelegramBotAPI.git
-$ cd pyTelegramBotAPI
+$ git clone https://github.com/keralasbot/KeralaPyAPI.git
+$ cd KeralaPyAPI
 $ python setup.py install
 ```
 
@@ -70,9 +67,9 @@ The TeleBot class (defined in \__init__.py) encapsulates all API calls in a sing
 Create a file called `echo_bot.py`.
 Then, open the file and create an instance of the TeleBot class.
 ```python
-import telebot
+import keralasbot
 
-bot = telebot.TeleBot("TOKEN")
+bot = keralasbot.keralasBot("TOKEN")
 ```
 *Note: Make sure to actually replace TOKEN with your own API token.*
 
@@ -102,9 +99,9 @@ bot.polling()
 ```
 Alright, that's it! Our source file now looks like this:
 ```python
-import telebot
+import keralasbotbot
 
-bot = telebot.TeleBot("TOKEN")
+bot = keralasbot.keralasBot("TOKEN")
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
@@ -162,8 +159,8 @@ TeleBot supports the following filters:
 Here are some examples of using the filters and message handlers:
 
 ```python
-import telebot
-bot = telebot.TeleBot("TOKEN")
+import keralasbot
+bot = keralasbot.keralasbot("TOKEN")
 
 # Handles all text messages that contains the commands '/start' or '/help'.
 @bot.message_handler(commands=['start', 'help'])
@@ -224,12 +221,12 @@ def  test_callback(call):
     logger.info(call)
 ```
 
-#### TeleBot
+#### KeralasBot
 ```python
-import telebot
+import keralasbot
 
 TOKEN = '<token_string>'
-tb = telebot.TeleBot(TOKEN)	#create a new Telegram Bot object
+tb = keralasbot.keralasbot(TOKEN)	#create a new Telegram Bot object
 
 # Upon calling this function, TeleBot starts polling the Telegram servers for new messages.
 # - none_stop: True/False (default False) - Don't stop polling when receiving an error from the Telegram servers
@@ -434,9 +431,9 @@ tb = telebot.AsyncTeleBot("TOKEN")
 ```
 Now, every function that calls the Telegram API is executed in a separate Thread. The functions are modified to return an AsyncTask instance (defined in util.py). Using AsyncTeleBot allows you to do the following:
 ```python
-import telebot
+import keralasbot
 
-tb = telebot.AsyncTeleBot("TOKEN")
+tb = telebot.AsyncKeralasBot("TOKEN")
 task = tb.get_me() # Execute an API call
 # Do some other operations...
 a = 0
@@ -450,7 +447,7 @@ result = task.wait() # Get the result of the execution
 ### Sending large text messages
 Sometimes you must send messages that exceed 5000 characters. The Telegram API can not handle that many characters in one request, so we need to split the message in multiples. Here is how to do that using the API:
 ```python
-from telebot import util
+from keralasbot import util
 large_text = open("large_text.txt", "rb").read()
 
 # Split the text each 3000 characters.
@@ -460,10 +457,10 @@ for text in splitted_text:
 	tb.send_message(chat_id, text)
 ```
 ### Controlling the amount of Threads used by TeleBot
-The TeleBot constructor takes the following optional arguments:
+The keralasBot constructor takes the following optional arguments:
 
  - threaded: True/False (default True). A flag to indicate whether
-   TeleBot should execute message handlers on it's polling Thread.
+   KeralasBot should execute message handlers on it's polling Thread.
 
 ### The listener mechanism
 As an alternative to the message handlers, one can also register a function as a listener to TeleBot. Example:
@@ -490,7 +487,7 @@ It is possible to add custom logging Handlers to the logger. Refer to the [Pytho
 ```python
 import logging
 
-logger = telebot.logger
+logger = keralasbot.logger
 telebot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console.
 ```
 
@@ -499,7 +496,7 @@ telebot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console.
 You can use proxy for request. `apihelper.proxy` object will use by call `requests` proxies argument.
 
 ```python
-from telebot import apihelper
+from keralasbot import apihelper
 
 apihelper.proxy = {'http':'http://10.10.1.10:3128'}
 ```
@@ -521,7 +518,7 @@ apihelper.proxy = {'https':'socks5://userproxy:password@proxy_address:port'}
 
 April 9,2016 Telegram release new bot 2.0 API, which has a drastic revision especially for the change of method's interface.If you want to update to the latest version, please make sure you've switched bot's code to bot 2.0 method interface.
 
-[More information about pyTelegramBotAPI support bot2.0](https://github.com/eternnoir/pyTelegramBotAPI/issues/130)
+[More information about KeralaPyAPI support bot2.0](https://github.com/eternnoir/KeralaPyAPI/issues/)
 
 ### How can I distinguish a User and a GroupChat in message.chat?
 Telegram Bot API support new type Chat for message.chat.
@@ -547,7 +544,7 @@ if message.chat.type == "channel":
 
 Get help. Discuss. Chat.
 
-* Join the [pyTelegramBotAPI Telegram Chat Group](https://telegram.me/joinchat/Bn4ixj84FIZVkwhk2jag6A)
+* Join the [Kerala Telegram Chat Group](https://telegram.me/keralasbot)
 * We now have a Telegram Channel as well! Keep yourself up to date with API changes, and [join it](https://telegram.me/pytelegrambotapi).
 
 ## More examples
@@ -555,48 +552,3 @@ Get help. Discuss. Chat.
 * [Echo Bot](https://github.com/eternnoir/pyTelegramBotAPI/blob/master/examples/echo_bot.py)
 * [Deep Linking](https://github.com/eternnoir/pyTelegramBotAPI/blob/master/examples/deep_linking.py)
 * [next_step_handler Example](https://github.com/eternnoir/pyTelegramBotAPI/blob/master/examples/step_example.py)
-
-## Bots using this API
-* [SiteAlert bot](https://telegram.me/SiteAlert_bot) ([source](https://github.com/ilteoood/SiteAlert-Python)) by *ilteoood* - Monitors websites and sends a notification on changes
-* [TelegramLoggingBot](https://github.com/aRandomStranger/TelegramLoggingBot) by *aRandomStranger*
-* [Send to Kindle Bot](https://telegram.me/Send2KindleBot) by *GabrielRF* - Send to Kindle files or links to files.
-* [Telegram LMGTFY_bot](https://github.com/GabrielRF/telegram-lmgtfy_bot) ([source](https://github.com/GabrielRF/telegram-lmgtfy_bot)) by *GabrielRF* - Let me Google that for you.
-* [Telegram UrlProBot](https://github.com/GabrielRF/telegram-urlprobot) ([source](https://github.com/GabrielRF/telegram-urlprobot)) by *GabrielRF* - URL shortener and URL expander.
-* [Telegram Proxy Bot](https://bitbucket.org/master_groosha/telegram-proxy-bot) by *Groosha* - A simple BITM (bot-in-the-middle) for Telegram acting as some kind of "proxy".
-* [Telegram Proxy Bot](https://github.com/mrgigabyte/proxybot) by *mrgigabyte* - `Credits for the original version of this bot goes to` **Groosha** `, simply added certain features which I thought were needed`.
-* [RadRetroRobot](https://github.com/Tronikart/RadRetroRobot) by *Tronikart* - Multifunctional Telegram Bot RadRetroRobot.
-* [League of Legends bot](https://telegram.me/League_of_Legends_bot) ([source](https://github.com/i32ropie/lol)) by *i32ropie*
-* [NeoBot](https://github.com/neoranger/NeoBot) by *neoranger*
-* [TagAlertBot](https://github.com/pitasi/TagAlertBot) by *pitasi*
-* [ComedoresUGRbot](http://telegram.me/ComedoresUGRbot) ([source](https://github.com/alejandrocq/ComedoresUGRbot)) by [*alejandrocq*](https://github.com/alejandrocq) - Telegram bot to check the menu of Universidad de Granada dining hall.
-* [picpingbot](https://web.telegram.org/#/im?p=%40picpingbot) - Fun anonymous photo exchange by Boogie Muffin.
-* [TheZigZagProject](https://github.com/WebShark025/TheZigZagProject) - The 'All In One' bot for Telegram! by WebShark025
-* [proxybot](https://github.com/p-hash/proxybot) - Simple Proxy Bot for Telegram. by p-hash
-* [DonantesMalagaBot](https://github.com/vfranch/DonantesMalagaBot)- DonantesMalagaBot facilitates information to Malaga blood donors about the places where they can donate today or in the incoming days. It also records the date of the last donation so that it helps the donors to know when they can donate again. - by vfranch
-* [DuttyBot](https://github.com/DmytryiStriletskyi/DuttyBot) by *Dmytryi Striletskyi* - Timetable for one university in Kiev.
-* [dailypepebot](https://telegram.me/dailypepebot) by [*Jaime*](https://github.com/jiwidi/Dailypepe) - Get's you random pepe images and gives you their id, then you can call this image with the number.
-* [DailyQwertee](https://t.me/DailyQwertee) by [*Jaime*](https://github.com/jiwidi/DailyQwertee) - Bot that manages a channel that sends qwertee daily tshirts every day at 00:00
-* [wat-bridge](https://github.com/rmed/wat-bridge) by [*rmed*](https://github.com/rmed) - Send and receive messages to/from WhatsApp through Telegram
-* [flibusta_bot](https://github.com/Kurbezz/flibusta_bot) by [*Kurbezz*](https://github.com/Kurbezz)
-* [EmaProject](https://github.com/halkliff/emaproject) by [*halkliff*](https://github.com/halkliff) - Ema - Eastern Media Assistant was made thinking on the ease-to-use feature. Coding here is simple, as much as is fast and powerful.
-* [filmratingbot](http://t.me/filmratingbot)([source](https://github.com/jcolladosp/film-rating-bot)) by [*jcolladosp*](https://github.com/jcolladosp) - Telegram bot using the Python API that gets films rating from IMDb and metacritic
-* [you2mp3bot](http://t.me/you2mp3bot)([link](https://storebot.me/bot/you2mp3bot)) - This bot can convert a Youtube video to Mp3. All you need is send the URL video.
-* [Send2Kindlebot](http://t.me/Send2KindleBot) ([source](https://github.com/GabrielRF/Send2KindleBot)) by *GabrielRF* - Send to Kindle service.
-* [RastreioBot](http://t.me/RastreioBot) ([source](https://github.com/GabrielRF/RastreioBot)) by *GabrielRF* - Bot used to track packages on the Brazilian Mail Service.
-* [filex_bot](http://t.me/filex_bot)([link](https://github.com/victor141516/FileXbot-telegram))
-* [Spbu4UBot](http://t.me/Spbu4UBot)([link](https://github.com/EeOneDown/spbu4u)) by *EeOneDown* - Bot with timetables for SPbU students.
-* [SmartySBot](http://t.me/ZDU_bot)([link](https://github.com/0xVK/SmartySBot)) by *0xVK* - Telegram timetable bot, for Zhytomyr Ivan Franko State University students.
-* [yandex_music_bot](http://t.me/yandex_music_bot)- Downloads tracks/albums/public playlists from Yandex.Music streaming service for free.
-* [LearnIt](https://t.me/LearnItbot)([link](https://github.com/tiagonapoli/LearnIt)) - A Telegram Bot created to help people to memorize other languages’ vocabulary.
-* [MusicQuiz_bot](https://t.me/MusicQuiz_bot) by [Etoneja](https://github.com/Etoneja) - Listen to audiosamles and try to name the performer of the song.
-* [Bot-Telegram-Shodan ](https://github.com/rubenleon/Bot-Telegram-Shodan) by [rubenleon](https://github.com/rubenleon)
-* [MandangoBot](https://t.me/MandangoBot) by @Alvaricias - Bot for managing Marvel Strike Force alliances (only in spanish, atm).
-* [VigoBusTelegramBot](https://t.me/vigobusbot) ([GitHub](https://github.com/Pythoneiro/VigoBus-TelegramBot)) - Bot that provides buses coming to a certain stop and their remaining time for the city of Vigo (Galicia - Spain)
-* [kaishnik-bot](https://t.me/kaishnik_bot) ([source](https://github.com/airatk/kaishnik-bot)) by *airatk* - bot which shows all the necessary information to KNTRU-KAI students.
-* [Creation Date](https://t.me/creationdatebot) by @karipov - interpolates account creation dates based on telegram given ID’s
-* [m0xbot](https://t.me/m0xbot) by [kor0p](https://github.com/kor0p) - tic-tac-toe.  
-* [kboardbot](https://t.me/kboardbot) by [kor0p](https://github.com/kor0p) - inline switches keyboard layout (English, Hebrew, Ukrainian, Russian).  
-* [Robbie](https://t.me/romdeliverybot) ([source](https://github.com/FacuM/romdeliverybot_support)) by @FacuM - Support Telegram bot for developers and maintainers.
-* [AsadovBot](https://t.me/asadov_bot) ([source])(https://github.com/desexcile/BotApi)) by @DesExcile - Сatalog of poems by Eduard Asadov.
-
-Want to have your bot listed here? Send a Telegram message to @eternnoir or @pevdh.
