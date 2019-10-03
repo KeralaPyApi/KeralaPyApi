@@ -17,7 +17,7 @@ except ImportError:
     import queue as Queue
 import logging
 
-logger = logging.getLogger('keralsbot')
+logger = logging.getLogger('bot')
 
 thread_local = threading.local()
 
