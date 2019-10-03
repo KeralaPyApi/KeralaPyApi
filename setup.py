@@ -6,15 +6,15 @@ def read(filename):
     with open(filename, encoding='utf-8') as file:
         return file.read()
 
-setup(name='KBPython',
+setup(name='KeralaPyApi',
       version='3.6.6',
       description='Python Telegram bot api. ',
       long_description=read('README.md'),
       long_description_content_type="text/markdown",
       author='Kerala Team',
       author_email='anandps002@gmail.com',
-      url='https://github.com/keralasbots/KBPYTHON',
-      packages=['keralasbot'],
+      url='https://github.com/KeralaPyApi/KeralaPyApi',
+      packages=['keralabot'],
       license='GPL2',
       keywords='telegram bot api tools',
       install_requires=['requests', 'six'],
