@@ -62,14 +62,14 @@ Furthermore, you have basic knowledge of the Python programming language and mor
 
 ### A simple echo bot
 
-The TeleBot class (defined in \__init__.py) encapsulates all API calls in a single class. It provides functions such as `send_xyz` (`send_message`, `send_document` etc.) and several ways to listen for incoming messages.
+The KeralaBot class (defined in \__init__.py) encapsulates all API calls in a single class. It provides functions such as `send_xyz` (`send_message`, `send_document` etc.) and several ways to listen for incoming messages.
 
 Create a file called `echo_bot.py`.
 Then, open the file and create an instance of the TeleBot class.
 ```python
-import keralasbot
+import keralabot
 
-bot = keralasbot.keralasBot("TOKEN")
+bot = keralabot.bot("TOKEN")
 ```
 *Note: Make sure to actually replace TOKEN with your own API token.*
 
@@ -99,9 +99,9 @@ bot.polling()
 ```
 Alright, that's it! Our source file now looks like this:
 ```python
-import keralasbotbot
+import keralabot
 
-bot = keralasbot.keralasBot("TOKEN")
+bot = keralabot.bot("TOKEN")
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
@@ -159,8 +159,8 @@ TeleBot supports the following filters:
 Here are some examples of using the filters and message handlers:
 
 ```python
-import keralasbot
-bot = keralasbot.keralasbot("TOKEN")
+import keralabot
+bot = keralabot.bot("TOKEN")
 
 # Handles all text messages that contains the commands '/start' or '/help'.
 @bot.message_handler(commands=['start', 'help'])
@@ -221,12 +221,12 @@ def  test_callback(call):
     logger.info(call)
 ```
 
-#### KeralasBot
+#### KeralaBot
 ```python
-import keralasbot
+import keralabot
 
 TOKEN = '<token_string>'
-tb = keralasbot.keralasbot(TOKEN)	#create a new Telegram Bot object
+tb = keralabot.bot(TOKEN)	#create a new Telegram Bot object
 
 # Upon calling this function, TeleBot starts polling the Telegram servers for new messages.
 # - none_stop: True/False (default False) - Don't stop polling when receiving an error from the Telegram servers
@@ -314,7 +314,7 @@ file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN,
 All `send_xyz` functions of TeleBot take an optional `reply_markup` argument. This argument must be an instance of `ReplyKeyboardMarkup`, `ReplyKeyboardRemove` or `ForceReply`, which are defined in types.py.
 
 ```python
-from keralasbot import types
+from keralabot import types
 
 # Using the ReplyKeyboardMarkup class
 # It's constructor can take the following optional arguments:
@@ -427,13 +427,13 @@ Refer [Bot Api](https://core.telegram.org/bots/api#messageentity) for extra deta
 There exists an implementation of TeleBot which executes all `send_xyz` and the `get_me` functions asynchronously. This can speed up you bot __significantly__, but it has unwanted side effects if used without caution.
 To enable this behaviour, create an instance of AsyncTeleBot instead of TeleBot.
 ```python
-tb = telebot.AsyncTeleBot("TOKEN")
+tb = bot.AsyncKeralaBot("TOKEN")
 ```
 Now, every function that calls the Telegram API is executed in a separate Thread. The functions are modified to return an AsyncTask instance (defined in util.py). Using AsyncTeleBot allows you to do the following:
 ```python
-import keralasbot
+import keralabot
 
-tb = telebot.AsyncKeralasBot("TOKEN")
+tb = bot.AsyncKeralasBot("TOKEN")
 task = tb.get_me() # Execute an API call
 # Do some other operations...
 a = 0
@@ -447,7 +447,7 @@ result = task.wait() # Get the result of the execution
 ### Sending large text messages
 Sometimes you must send messages that exceed 5000 characters. The Telegram API can not handle that many characters in one request, so we need to split the message in multiples. Here is how to do that using the API:
 ```python
-from keralasbot import util
+from keralabot import util
 large_text = open("large_text.txt", "rb").read()
 
 # Split the text each 3000 characters.
@@ -460,7 +460,7 @@ for text in splitted_text:
 The keralasBot constructor takes the following optional arguments:
 
  - threaded: True/False (default True). A flag to indicate whether
-   KeralasBot should execute message handlers on it's polling Thread.
+   KeralaBot should execute message handlers on it's polling Thread.
 
 ### The listener mechanism
 As an alternative to the message handlers, one can also register a function as a listener to TeleBot. Example:
@@ -487,8 +487,8 @@ It is possible to add custom logging Handlers to the logger. Refer to the [Pytho
 ```python
 import logging
 
-logger = keralasbot.logger
-telebot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console.
+logger = keralabot.logger
+Keralabot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console.
 ```
 
 ### Proxy
@@ -496,29 +496,19 @@ telebot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console.
 You can use proxy for request. `apihelper.proxy` object will use by call `requests` proxies argument.
 
 ```python
-from keralasbot import apihelper
+from keralabot import botapi
 
-apihelper.proxy = {'http':'http://10.10.1.10:3128'}
+botapi.proxy = {'http':'http://10.10.1.10:3128'}
 ```
 
 If you want to use socket5 proxy you need install dependency `pip install requests[socks]` and make sure, that you have the latest version of `gunicorn`, `PySocks`, `pyTelegramBotAPI`, `requests` and `urllib3`.
 
 ```python
-apihelper.proxy = {'https':'socks5://userproxy:password@proxy_address:port'}
+botapi.proxy = {'https':'socks5://userproxy:password@proxy_address:port'}
 ```
 
 
-## New in library
-
-06.06.2019 - Добавленна поддержка опросов (Poll). Добавлены функции send_poll, stop_poll
-
-## F.A.Q.
-
-### Bot 2.0
-
-April 9,2016 Telegram release new bot 2.0 API, which has a drastic revision especially for the change of method's interface.If you want to update to the latest version, please make sure you've switched bot's code to bot 2.0 method interface.
-
-[More information about KeralaPyAPI support bot2.0](https://github.com/eternnoir/KeralaPyAPI/issues/)
+[More information about KeralaPyAPI support bot2.0](https://github.com/KeralaPyApi/KeralaPyAPI/issues/)
 
 ### How can I distinguish a User and a GroupChat in message.chat?
 Telegram Bot API support new type Chat for message.chat.
@@ -545,10 +535,8 @@ if message.chat.type == "channel":
 Get help. Discuss. Chat.
 
 * Join the [Kerala Telegram Chat Group](https://telegram.me/keralasbot)
-* We now have a Telegram Channel as well! Keep yourself up to date with API changes, and [join it](https://telegram.me/pytelegrambotapi).
+* We now have a Telegram Channel as well! Keep yourself up to date with API changes, and [join it](https://telegram.me/keralasbotnews).
 
 ## More examples
 
-* [Echo Bot](https://github.com/eternnoir/pyTelegramBotAPI/blob/master/examples/echo_bot.py)
-* [Deep Linking](https://github.com/eternnoir/pyTelegramBotAPI/blob/master/examples/deep_linking.py)
-* [next_step_handler Example](https://github.com/eternnoir/pyTelegramBotAPI/blob/master/examples/step_example.py)
+WILL BE SOON PUBLISHED
