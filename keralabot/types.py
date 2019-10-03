@@ -7,7 +7,7 @@ except ImportError:
 
 import six
 
-from keralasbot import util
+from keralabot import util
 
 
 class JsonSerializable(object):
