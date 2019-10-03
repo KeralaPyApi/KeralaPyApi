@@ -220,17 +220,17 @@ class bot:
         self.reply_saver.load_handlers(filename)
 
     def set_webhook(self, url=None, certificate=None, max_connections=None, allowed_updates=None):
-        return apihelper.set_webhook(self.token, url, certificate, max_connections, allowed_updates)
+        return botapi.set_webhook(self.token, url, certificate, max_connections, allowed_updates)
 
     def delete_webhook(self):
         """
         Use this method to remove webhook integration if you decide to switch back to getUpdates.
         :return: bool
         """
-        return apihelper.delete_webhook(self.token)
+        return botapi.delete_webhook(self.token)
 
     def get_webhook_info(self):
-        result = apihelper.get_webhook_info(self.token)
+        result = botapi.get_webhook_info(self.token)
         return types.WebhookInfo.de_json(result)
 
     def remove_webhook(self):
@@ -245,7 +245,7 @@ class bot:
         :param timeout: Integer. Timeout in seconds for long polling.
         :return: array of Updates
         """
-        json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+        json_updates = botapi.get_updates(self.token, offset, limit, timeout, allowed_updates)
         ret = []
         for ju in json_updates:
             ret.append(types.Update.de_json(ju))
@@ -415,7 +415,7 @@ class bot:
                 self.worker_pool.raise_exceptions()
 
                 error_interval = .25
-            except apihelper.ApiException as e:
+            except botapi.ApiException as e:
                 logger.error(e)
                 if not none_stop:
                     self.__stop_polling.set()
@@ -443,7 +443,7 @@ class bot:
             try:
                 self.__retrieve_updates(timeout)
                 error_interval = .25
-            except apihelper.ApiException as e:
+            except botapi.ApiException as e:
                 logger.error(e)
                 if not none_stop:
                     self.__stop_polling.set()
@@ -477,17 +477,17 @@ class bot:
         self.update_listener.append(listener)
 
     def get_me(self):
-        result = apihelper.get_me(self.token)
+        result = botapi.get_me(self.token)
         return types.User.de_json(result)
 
     def get_file(self, file_id):
-        return types.File.de_json(apihelper.get_file(self.token, file_id))
+        return types.File.de_json(botapi.get_file(self.token, file_id))
 
     def get_file_url(self, file_id):
-        return apihelper.get_file_url(self.token, file_id)
+        return botapi.get_file_url(self.token, file_id)
 
     def download_file(self, file_path):
-        return apihelper.download_file(self.token, file_path)
+        return botapi.download_file(self.token, file_path)
 
     def get_user_profile_photos(self, user_id, offset=None, limit=None):
         """
@@ -498,7 +498,7 @@ class bot:
         :param limit:
         :return: API reply.
         """
-        result = apihelper.get_user_profile_photos(self.token, user_id, offset, limit)
+        result = botapi.get_user_profile_photos(self.token, user_id, offset, limit)
         return types.UserProfilePhotos.de_json(result)
 
     def get_chat(self, chat_id):
@@ -508,7 +508,7 @@ class bot:
         :param chat_id:
         :return:
         """
-        result = apihelper.get_chat(self.token, chat_id)
+        result = botapi.get_chat(self.token, chat_id)
         return types.Chat.de_json(result)
 
     def leave_chat(self, chat_id):
@@ -517,7 +517,7 @@ class bot:
         :param chat_id:
         :return:
         """
-        result = apihelper.leave_chat(self.token, chat_id)
+        result = botapi.leave_chat(self.token, chat_id)
         return result
 
     def get_chat_administrators(self, chat_id):
@@ -527,7 +527,7 @@ class bot:
         :param chat_id:
         :return:
         """
-        result = apihelper.get_chat_administrators(self.token, chat_id)
+        result = botapi.get_chat_administrators(self.token, chat_id)
         ret = []
         for r in result:
             ret.append(types.ChatMember.de_json(r))
@@ -539,7 +539,7 @@ class bot:
         :param chat_id:
         :return:
         """
-        result = apihelper.get_chat_members_count(self.token, chat_id)
+        result = botapi.get_chat_members_count(self.token, chat_id)
         return result
 
     def set_chat_sticker_set(self, chat_id, sticker_set_name):
@@ -553,7 +553,7 @@ class bot:
         :param sticker_set_name: Name of the sticker set to be set as the group sticker set
         :return:
         """
-        result = apihelper.set_chat_sticker_set(self.token, chat_id, sticker_set_name)
+        result = botapi.set_chat_sticker_set(self.token, chat_id, sticker_set_name)
         return result
 
     def delete_chat_sticker_set(self, chat_id):
@@ -565,7 +565,7 @@ class bot:
         (in the format @supergroupusername)
         :return:
         """
-        result = apihelper.delete_chat_sticker_set(self.token, chat_id)
+        result = botapi.delete_chat_sticker_set(self.token, chat_id)
         return result
 
     def get_chat_member(self, chat_id, user_id):
@@ -575,7 +575,7 @@ class bot:
         :param user_id:
         :return:
         """
-        result = apihelper.get_chat_member(self.token, chat_id, user_id)
+        result = botapi.get_chat_member(self.token, chat_id, user_id)
         return types.ChatMember.de_json(result)
 
     def send_message(self, chat_id, text, disable_web_page_preview=None, reply_to_message_id=None, reply_markup=None,
@@ -596,7 +596,7 @@ class bot:
         :return: API reply.
         """
         return types.Message.de_json(
-            apihelper.send_message(self.token, chat_id, text, disable_web_page_preview, reply_to_message_id,
+            botapi.send_message(self.token, chat_id, text, disable_web_page_preview, reply_to_message_id,
                                    reply_markup, parse_mode, disable_notification))
 
     def forward_message(self, chat_id, from_chat_id, message_id, disable_notification=None):
@@ -609,7 +609,7 @@ class bot:
         :return: API reply.
         """
         return types.Message.de_json(
-            apihelper.forward_message(self.token, chat_id, from_chat_id, message_id, disable_notification))
+            botapi.forward_message(self.token, chat_id, from_chat_id, message_id, disable_notification))
 
     def delete_message(self, chat_id, message_id):
         """
@@ -618,7 +618,7 @@ class bot:
         :param message_id: which message to delete
         :return: API reply.
         """
-        return apihelper.delete_message(self.token, chat_id, message_id)
+        return botapi.delete_message(self.token, chat_id, message_id)
 
     def send_photo(self, chat_id, photo, caption=None, reply_to_message_id=None, reply_markup=None,
                    parse_mode=None, disable_notification=None):
@@ -634,7 +634,7 @@ class bot:
         :return: API reply.
         """
         return types.Message.de_json(
-            apihelper.send_photo(self.token, chat_id, photo, caption, reply_to_message_id, reply_markup,
+            botapi.send_photo(self.token, chat_id, photo, caption, reply_to_message_id, reply_markup,
                                  parse_mode, disable_notification))
 
     def send_audio(self, chat_id, audio, caption=None, duration=None, performer=None, title=None,
@@ -653,7 +653,7 @@ class bot:
         :return: Message
         """
         return types.Message.de_json(
-            apihelper.send_audio(self.token, chat_id, audio, caption, duration, performer, title, reply_to_message_id,
+            botapi.send_audio(self.token, chat_id, audio, caption, duration, performer, title, reply_to_message_id,
                                  reply_markup, parse_mode, disable_notification, timeout))
 
     def send_voice(self, chat_id, voice, caption=None, duration=None, reply_to_message_id=None, reply_markup=None,
@@ -669,7 +669,7 @@ class bot:
         :return: Message
         """
         return types.Message.de_json(
-            apihelper.send_voice(self.token, chat_id, voice, caption, duration, reply_to_message_id, reply_markup,
+            botapi.send_voice(self.token, chat_id, voice, caption, duration, reply_to_message_id, reply_markup,
                                  parse_mode, disable_notification, timeout))
 
     def send_document(self, chat_id, data, reply_to_message_id=None, caption=None, reply_markup=None,
@@ -685,7 +685,7 @@ class bot:
         :return: API reply.
         """
         return types.Message.de_json(
-            apihelper.send_data(self.token, chat_id, data, 'document', reply_to_message_id, reply_markup,
+            botapi.send_data(self.token, chat_id, data, 'document', reply_to_message_id, reply_markup,
                                 parse_mode, disable_notification, timeout, caption=caption))
 
     def send_sticker(self, chat_id, data, reply_to_message_id=None, reply_markup=None, disable_notification=None,
@@ -699,7 +699,7 @@ class bot:
         :return: API reply.
         """
         return types.Message.de_json(
-            apihelper.send_data(self.token, chat_id, data, 'sticker', reply_to_message_id, reply_markup,
+            botapi.send_data(self.token, chat_id, data, 'sticker', reply_to_message_id, reply_markup,
                                 disable_notification, timeout))
 
     def send_video(self, chat_id, data, duration=None, caption=None, reply_to_message_id=None, reply_markup=None,
@@ -717,7 +717,7 @@ class bot:
         :return:
         """
         return types.Message.de_json(
-            apihelper.send_video(self.token, chat_id, data, duration, caption, reply_to_message_id, reply_markup,
+            botapi.send_video(self.token, chat_id, data, duration, caption, reply_to_message_id, reply_markup,
                                  parse_mode, supports_streaming, disable_notification, timeout))
 
     def send_video_note(self, chat_id, data, duration=None, length=None, reply_to_message_id=None, reply_markup=None,
@@ -733,7 +733,7 @@ class bot:
         :return:
         """
         return types.Message.de_json(
-            apihelper.send_video_note(self.token, chat_id, data, duration, length, reply_to_message_id, reply_markup,
+            botapi.send_video_note(self.token, chat_id, data, duration, length, reply_to_message_id, reply_markup,
                                       disable_notification, timeout))
 
     def send_media_group(self, chat_id, media, disable_notification=None, reply_to_message_id=None):
@@ -745,7 +745,7 @@ class bot:
         :param reply_to_message_id:
         :return:
         """
-        result = apihelper.send_media_group(self.token, chat_id, media, disable_notification, reply_to_message_id)
+        result = botapi.send_media_group(self.token, chat_id, media, disable_notification, reply_to_message_id)
         ret = []
         for msg in result:
             ret.append(types.Message.de_json(msg))
@@ -764,7 +764,7 @@ class bot:
         :return: API reply.
         """
         return types.Message.de_json(
-            apihelper.send_location(self.token, chat_id, latitude, longitude, live_period, reply_to_message_id,
+            botapi.send_location(self.token, chat_id, latitude, longitude, live_period, reply_to_message_id,
                                     reply_markup,
                                     disable_notification))
 
@@ -781,7 +781,7 @@ class bot:
         :return:
         """
         return types.Message.de_json(
-            apihelper.edit_message_live_location(self.token, latitude, longitude, chat_id, message_id,
+            botapi.edit_message_live_location(self.token, latitude, longitude, chat_id, message_id,
                                                  inline_message_id, reply_markup))
 
     def stop_message_live_location(self, chat_id=None, message_id=None, inline_message_id=None, reply_markup=None):
@@ -795,7 +795,7 @@ class bot:
         :return:
         """
         return types.Message.de_json(
-            apihelper.stop_message_live_location(self.token, chat_id, message_id, inline_message_id, reply_markup))
+            botapi.stop_message_live_location(self.token, chat_id, message_id, inline_message_id, reply_markup))
 
     def send_venue(self, chat_id, latitude, longitude, title, address, foursquare_id=None, disable_notification=None,
                    reply_to_message_id=None, reply_markup=None):
@@ -813,14 +813,14 @@ class bot:
         :return:
         """
         return types.Message.de_json(
-            apihelper.send_venue(self.token, chat_id, latitude, longitude, title, address, foursquare_id,
+            botapi.send_venue(self.token, chat_id, latitude, longitude, title, address, foursquare_id,
                                  disable_notification, reply_to_message_id, reply_markup)
         )
 
     def send_contact(self, chat_id, phone_number, first_name, last_name=None, disable_notification=None,
                      reply_to_message_id=None, reply_markup=None):
         return types.Message.de_json(
-            apihelper.send_contact(self.token, chat_id, phone_number, first_name, last_name, disable_notification,
+            botapi.send_contact(self.token, chat_id, phone_number, first_name, last_name, disable_notification,
                                    reply_to_message_id, reply_markup)
         )
 
@@ -834,7 +834,7 @@ class bot:
                         'record_audio', 'upload_audio', 'upload_document', 'find_location', 'record_video_note', 'upload_video_note'.
         :return: API reply. :type: boolean
         """
-        return apihelper.send_chat_action(self.token, chat_id, action)
+        return botapi.send_chat_action(self.token, chat_id, action)
 
     def kick_chat_member(self, chat_id, user_id, until_date=None):
         """
@@ -845,10 +845,10 @@ class bot:
                less than 30 seconds from the current time they are considered to be banned forever
         :return: types.Message
         """
-        return apihelper.kick_chat_member(self.token, chat_id, user_id, until_date)
+        return botapi.kick_chat_member(self.token, chat_id, user_id, until_date)
 
     def unban_chat_member(self, chat_id, user_id):
-        return apihelper.unban_chat_member(self.token, chat_id, user_id)
+        return botapi.unban_chat_member(self.token, chat_id, user_id)
 
     def restrict_chat_member(self, chat_id, user_id, until_date=None, can_send_messages=None,
                              can_send_media_messages=None, can_send_other_messages=None,
@@ -873,7 +873,7 @@ class bot:
             implies can_send_media_messages
         :return: types.Message
         """
-        return apihelper.restrict_chat_member(self.token, chat_id, user_id, until_date, can_send_messages,
+        return botapi.restrict_chat_member(self.token, chat_id, user_id, until_date, can_send_messages,
                                               can_send_media_messages, can_send_other_messages,
                                               can_add_web_page_previews)
 
@@ -899,7 +899,7 @@ class bot:
             (promoted by administrators that were appointed by him)
         :return:
         """
-        return apihelper.promote_chat_member(self.token, chat_id, user_id, can_change_info, can_post_messages,
+        return botapi.promote_chat_member(self.token, chat_id, user_id, can_change_info, can_post_messages,
                                              can_edit_messages, can_delete_messages, can_invite_users,
                                              can_restrict_members, can_pin_messages, can_promote_members)
 
@@ -912,7 +912,7 @@ class bot:
             (in the format @channelusername)
         :return:
         """
-        return apihelper.export_chat_invite_link(self.token, chat_id)
+        return botapi.export_chat_invite_link(self.token, chat_id)
 
     def set_chat_photo(self, chat_id, photo):
         """
@@ -926,7 +926,7 @@ class bot:
         :param photo: InputFile: New chat photo, uploaded using multipart/form-data
         :return:
         """
-        return apihelper.set_chat_photo(self.token, chat_id, photo)
+        return botapi.set_chat_photo(self.token, chat_id, photo)
 
     def delete_chat_photo(self, chat_id):
         """
@@ -939,7 +939,7 @@ class bot:
             (in the format @channelusername)
         :return:
         """
-        return apihelper.delete_chat_photo(self.token, chat_id)
+        return botapi.delete_chat_photo(self.token, chat_id)
 
     def set_chat_title(self, chat_id, title):
         """
@@ -953,7 +953,7 @@ class bot:
         :param title: New chat title, 1-255 characters
         :return:
         """
-        return apihelper.set_chat_title(self.token, chat_id, title)
+        return botapi.set_chat_title(self.token, chat_id, title)
 
     def set_chat_description(self, chat_id, description):
         """
@@ -965,7 +965,7 @@ class bot:
         :param description: Str: New chat description, 0-255 characters
         :return:
         """
-        return apihelper.set_chat_description(self.token, chat_id, description)
+        return botapi.set_chat_description(self.token, chat_id, description)
 
     def pin_chat_message(self, chat_id, message_id, disable_notification=False):
         """
@@ -979,7 +979,7 @@ class bot:
             to all group members about the new pinned message
         :return:
         """
-        return apihelper.pin_chat_message(self.token, chat_id, message_id, disable_notification)
+        return botapi.pin_chat_message(self.token, chat_id, message_id, disable_notification)
 
     def unpin_chat_message(self, chat_id):
         """
@@ -990,44 +990,44 @@ class bot:
             (in the format @channelusername)
         :return:
         """
-        return apihelper.unpin_chat_message(self.token, chat_id)
+        return botapi.unpin_chat_message(self.token, chat_id)
 
     def edit_message_text(self, text, chat_id=None, message_id=None, inline_message_id=None, parse_mode=None,
                           disable_web_page_preview=None, reply_markup=None):
-        result = apihelper.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
+        result = botapi.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
                                              disable_web_page_preview, reply_markup)
         if type(result) == bool:  # if edit inline message return is bool not Message.
             return result
         return types.Message.de_json(result)
 
     def edit_message_media(self, media, chat_id=None, message_id=None, inline_message_id=None, reply_markup=None):
-        result = apihelper.edit_message_media(self.token, media, chat_id, message_id, inline_message_id, reply_markup)
+        result = botapi.edit_message_media(self.token, media, chat_id, message_id, inline_message_id, reply_markup)
         if type(result) == bool:  # if edit inline message return is bool not Message.
             return result
         return types.Message.de_json(result)
 
     def edit_message_reply_markup(self, chat_id=None, message_id=None, inline_message_id=None, reply_markup=None):
-        result = apihelper.edit_message_reply_markup(self.token, chat_id, message_id, inline_message_id, reply_markup)
+        result = botapi.edit_message_reply_markup(self.token, chat_id, message_id, inline_message_id, reply_markup)
         if type(result) == bool:
             return result
         return types.Message.de_json(result)
 
     def send_game(self, chat_id, game_short_name, disable_notification=None, reply_to_message_id=None,
                   reply_markup=None):
-        result = apihelper.send_game(self.token, chat_id, game_short_name, disable_notification, reply_to_message_id,
+        result = botapi.send_game(self.token, chat_id, game_short_name, disable_notification, reply_to_message_id,
                                      reply_markup)
         return types.Message.de_json(result)
 
     def set_game_score(self, user_id, score, force=None, chat_id=None, message_id=None, inline_message_id=None,
                        edit_message=None):
-        result = apihelper.set_game_score(self.token, user_id, score, force, chat_id, message_id, inline_message_id,
+        result = botapi.set_game_score(self.token, user_id, score, force, chat_id, message_id, inline_message_id,
                                           edit_message)
         if type(result) == bool:
             return result
         return types.Message.de_json(result)
 
     def get_game_high_scores(self, user_id, chat_id=None, message_id=None, inline_message_id=None):
-        result = apihelper.get_game_high_scores(self.token, user_id, chat_id, message_id, inline_message_id)
+        result = botapi.get_game_high_scores(self.token, user_id, chat_id, message_id, inline_message_id)
         ret = []
         for r in result:
             ret.append(types.GameHighScore.de_json(r))
@@ -1038,7 +1038,7 @@ class bot:
                      need_name=None, need_phone_number=None, need_email=None, need_shipping_address=None,
                      is_flexible=None, disable_notification=None, reply_to_message_id=None, reply_markup=None,
                      provider_data=None):
-        result = apihelper.send_invoice(self.token, chat_id, title, description, invoice_payload, provider_token,
+        result = botapi.send_invoice(self.token, chat_id, title, description, invoice_payload, provider_token,
                                         currency, prices, start_parameter, photo_url, photo_size, photo_width,
                                         photo_height,
                                         need_name, need_phone_number, need_email, need_shipping_address, is_flexible,
@@ -1046,20 +1046,20 @@ class bot:
         return types.Message.de_json(result)
 
     def send_poll(self, chat_id, poll, disable_notifications=False, reply_to_message=None, reply_markup=None):
-        return types.Message.de_json(apihelper.send_poll(self.token, chat_id, poll.question, poll.options, disable_notifications, reply_to_message, reply_markup))
+        return types.Message.de_json(botapi.send_poll(self.token, chat_id, poll.question, poll.options, disable_notifications, reply_to_message, reply_markup))
 
     def stop_poll(self, chat_id, message_id):
-        return types.Poll.de_json(apihelper.stop_poll(self.token, chat_id, message_id))
+        return types.Poll.de_json(botapi.stop_poll(self.token, chat_id, message_id))
 
     def answer_shipping_query(self, shipping_query_id, ok, shipping_options=None, error_message=None):
-        return apihelper.answer_shipping_query(self.token, shipping_query_id, ok, shipping_options, error_message)
+        return botapi.answer_shipping_query(self.token, shipping_query_id, ok, shipping_options, error_message)
 
     def answer_pre_checkout_query(self, pre_checkout_query_id, ok, error_message=None):
-        return apihelper.answer_pre_checkout_query(self.token, pre_checkout_query_id, ok, error_message)
+        return botapi.answer_pre_checkout_query(self.token, pre_checkout_query_id, ok, error_message)
 
     def edit_message_caption(self, caption, chat_id=None, message_id=None, inline_message_id=None,
                              parse_mode=None, reply_markup=None):
-        result = apihelper.edit_message_caption(self.token, caption, chat_id, message_id, inline_message_id,
+        result = botapi.edit_message_caption(self.token, caption, chat_id, message_id, inline_message_id,
                                                 parse_mode, reply_markup)
         if type(result) == bool:
             return result
@@ -1086,7 +1086,7 @@ class bot:
         :param switch_pm_text: 	Parameter for the start message sent to the bot when user presses the switch button
         :return: True means success.
         """
-        return apihelper.answer_inline_query(self.token, inline_query_id, results, cache_time, is_personal, next_offset,
+        return botapi.answer_inline_query(self.token, inline_query_id, results, cache_time, is_personal, next_offset,
                                              switch_pm_text, switch_pm_parameter)
 
     def answer_callback_query(self, callback_query_id, text=None, show_alert=None, url=None, cache_time=None):
@@ -1098,7 +1098,7 @@ class bot:
         :param show_alert:
         :return:
         """
-        return apihelper.answer_callback_query(self.token, callback_query_id, text, show_alert, url, cache_time)
+        return botapi.answer_callback_query(self.token, callback_query_id, text, show_alert, url, cache_time)
 
     # def send_sticker(self, chat_id, sticker, disable_notification=None, reply_to_message_id=None, reply_markup=None):
     #     """
@@ -1110,7 +1110,7 @@ class bot:
     #     :param reply_markup:
     #     :return:
     #     """
-    #     result = apihelper.send_sticker(self.token, chat_id, sticker, disable_notification, reply_markup, reply_markup)
+    #     result = botapi.send_sticker(self.token, chat_id, sticker, disable_notification, reply_markup, reply_markup)
     #     return types.Message.de_json(result)
 
     def get_sticker_set(self, name):
@@ -1119,7 +1119,7 @@ class bot:
         :param name:
         :return:
         """
-        result = apihelper.get_sticker_set(self.token, name)
+        result = botapi.get_sticker_set(self.token, name)
         return types.StickerSet.de_json(result)
 
     def upload_sticker_file(self, user_id, png_sticker):
@@ -1130,7 +1130,7 @@ class bot:
         :param png_sticker:
         :return:
         """
-        result = apihelper.upload_sticker_file(self.token, user_id, png_sticker)
+        result = botapi.upload_sticker_file(self.token, user_id, png_sticker)
         return types.File.de_json(result)
 
     def create_new_sticker_set(self, user_id, name, title, png_sticker, emojis, contains_masks=None,
@@ -1147,7 +1147,7 @@ class bot:
         :param mask_position:
         :return:
         """
-        return apihelper.create_new_sticker_set(self.token, user_id, name, title, png_sticker, emojis, contains_masks,
+        return botapi.create_new_sticker_set(self.token, user_id, name, title, png_sticker, emojis, contains_masks,
                                                 mask_position)
 
     def add_sticker_to_set(self, user_id, name, png_sticker, emojis, mask_position=None):
@@ -1160,7 +1160,7 @@ class bot:
         :param mask_position:
         :return:
         """
-        return apihelper.add_sticker_to_set(self.token, user_id, name, png_sticker, emojis, mask_position)
+        return botapi.add_sticker_to_set(self.token, user_id, name, png_sticker, emojis, mask_position)
 
     def set_sticker_position_in_set(self, sticker, position):
         """
@@ -1169,7 +1169,7 @@ class bot:
         :param position:
         :return:
         """
-        return apihelper.set_sticker_position_in_set(self.token, sticker, position)
+        return botapi.set_sticker_position_in_set(self.token, sticker, position)
 
     def delete_sticker_from_set(self, sticker):
         """
@@ -1177,7 +1177,7 @@ class bot:
         :param sticker:
         :return:
         """
-        return apihelper.delete_sticker_from_set(self.token, sticker)
+        return botapi.delete_sticker_from_set(self.token, sticker)
 
     def register_for_reply(self, message, callback, *args, **kwargs):
         """
@@ -1327,7 +1327,7 @@ class bot:
 
         Example:
 
-        bot = keralasbot('TOKEN')
+        bot = bot('TOKEN')
 
         # Handles all messages which text matches regexp.
         @bot.message_handler(regexp='someregexp')
