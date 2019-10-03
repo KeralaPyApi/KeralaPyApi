@@ -17,7 +17,7 @@ import keralabot
 from keralabot import types
 from keralabot import util
 
-logger = bot.logger
+logger = keralabot.logger
 proxy = None
 
 API_URL = "https://api.telegram.org/bot{0}/{1}"
