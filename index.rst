@@ -1,8 +1,8 @@
-# <p align="center">KeralaPyApi
+<p align="center">KeralaPyApi
 
 <p align="center">A simple, but extensible Python implementation for the <a href="https://core.telegram.org/bots/api">Telegram Bot API</a>.
 
-  * [Getting started.](#getting-started)
+  * <a href=#getting-started>Getting Started</a>
   * [Writing your first bot](#writing-your-first-bot)
     * [Prerequisites](#prerequisites)
     * [A simple echo bot](#a-simple-echo-bot)
@@ -31,16 +31,16 @@
   * [More examples](#more-examples)
   * [Bots using this API](#bots-using-this-api)
 
-## Getting started.
+<a name=getting-started><B>Getting started.</B>
 
 This API is tested with Python 2.6, Python 2.7, Python 3.4, Pypy and Pypy 3.
 There are two ways to install the library:
 
 * Installation using pip (a Python package manager)*:
 
-```
+``
 $ pip install KeralaPyApi
-```
+``
 * Installation from source (requires git):
 
 ```
