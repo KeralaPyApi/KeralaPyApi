@@ -45,11 +45,11 @@ html_theme_options = {
     "style_external_links": True
 }
 
-html_logo = "https://github.com/KeralaPyApi/KeralaPyApi/blob/master/logos/IMG_20191103_164921.jpg"
+html_logo = "_imgs/KeralaPyApi.jpg"
 html_favicon = "_images/favicon.ico"
 
 latex_engine = "xelatex"
-latex_logo = "https://github.com/KeralaPyApi/KeralaPyApi/blob/master/logos/IMG_20191103_164921.jpg"
+latex_logo = "_imgs/KeralaPyApi.jpg"
 
 latex_elements = {
     "pointsize": "12pt",
