@@ -45,8 +45,8 @@ html_theme_options = {
     "style_external_links": True
 }
 
-html_logo = "docs/_imgs/KeralaPyApi.jpg"
-html_favicon = "_images/favicon.ico"
+html_logo = "_imgs/KeralaPyApi.jpg"
+html_favicon = "_images/KeralaPyApi.ico"
 
 latex_engine = "xelatex"
 latex_logo = "_imgs/KeralaPyApi.jpg"
