@@ -76,7 +76,7 @@ Welcome to Kerala Python Api
 
     <div align="center">
         <a href="/">
-            <div><img src="_imgs/KeralaPyApi.jpg" alt="KeralaPyApi Logo" width="420"></div>
+            <div><img src="https://github.com/KeralaPyApi/KeralaPyApi/blob/development/docs/_imgs/KeralaPyApi.jpg" alt="KeralaPyApi Logo" width="420"></div>
         </a>
     </div>
 
