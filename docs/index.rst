@@ -76,7 +76,7 @@ Welcome to Kerala Python Api
 
     <div align="center">
         <a href="/">
-            <div><img src="_static/pyrogram.png" alt="Pyrogram Logo" width="420"></div>
+            <div><img src="_imgs/KeralaPyApi.jpg" alt="KeralaPyApi Logo" width="420"></div>
         </a>
     </div>
 
