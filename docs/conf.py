@@ -3,7 +3,6 @@ import sys
 
 sys.path.insert(0, os.path.abspath("../.."))
 
-from Version.txt import __version__
 
 from pygments.styles.friendly import FriendlyStyle
 
@@ -23,7 +22,7 @@ master_doc = "index"
 source_suffix = ".rst"
 autodoc_member_order = "bysource"
 
-version = __version__
+version = "0.2.0"
 release = version
 
 templates_path = ["_templates"]
@@ -46,11 +45,11 @@ html_theme_options = {
     "style_external_links": True
 }
 
-html_logo = "_images/pyrogram.png"
+html_logo = "https://github.com/KeralaPyApi/KeralaPyApi/blob/master/logos/IMG_20191103_164921.jpg"
 html_favicon = "_images/favicon.ico"
 
 latex_engine = "xelatex"
-latex_logo = "_images/pyrogram.png"
+latex_logo = "https://github.com/KeralaPyApi/KeralaPyApi/blob/master/logos/IMG_20191103_164921.jpg"
 
 latex_elements = {
     "pointsize": "12pt",
