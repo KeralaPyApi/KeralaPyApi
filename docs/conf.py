@@ -3,7 +3,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath("../.."))
 
-from KeralaPyApi import __version__
+from Keralabot import __version__
 
 from pygments.styles.friendly import FriendlyStyle
 
