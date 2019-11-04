@@ -23,6 +23,7 @@ logger.addHandler(console_output_handler)
 logger.setLevel(logging.ERROR)
 
 from keralabot import botapi, types, util
+__version__ = "0.2.0"
 
 """
 Module : bot
