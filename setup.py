@@ -7,7 +7,7 @@ def read(filename):
         return file.read()
 
 setup(name='KeralaPyApi',
-      version='3.6.6',
+      version='0.2.0',
       description='Python Telegram bot api. ',
       long_description=read('README.md'),
       long_description_content_type="text/markdown",
