@@ -81,7 +81,7 @@ Welcome to Kerala Python Api
     </div>
 
     <p align="center">
-        <b>Telegram API Framework for Python</b>
+        <b>Telegram API Framework using Python</b>
 
         <br>
         <a href="https://github.com/pyrogram/pyrogram">
