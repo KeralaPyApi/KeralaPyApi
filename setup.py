@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-from setuptools import setup
+from setuptools import setup, find_packages
 from io import open
 import setuptools
+import os
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -9,6 +10,20 @@ with open("README.md", "r") as fh:
 def read(filename):
     with open(filename, encoding='utf-8') as file:
         return file.read()
+
+def requirements():
+    """Build the requirements list for this project"""
+    requirements_list = []
+
+    with open('requirements.txt') as requirements:
+        for install in requirements:
+            requirements_list.append(install.strip())
+
+    return requirements_list
+
+
+packages = find_packages(exclude=['logos*'])
+
 
 setup(name='KeralaPyApi',
       version='0.2.0',
@@ -18,13 +33,14 @@ setup(name='KeralaPyApi',
       author='Kerala Team',
       author_email='anandps002@gmail.com',
       url='https://github.com/KeralaPyApi/KeralaPyApi',
-      packages=['keralabot'],
+      packages=packages,
       license='GPL2',
       keywords='telegram bot api tools',
-      install_requires=['requests', 'six'],
+      install_requires=requirements(),
       extras_require={
           'json': 'ujson',
       },
+      include_package_data=True,
       classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Programming Language :: Python :: 2',
