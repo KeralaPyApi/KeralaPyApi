@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 from setuptools import setup
 from io import open
+import setuptools
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 def read(filename):
     with open(filename, encoding='utf-8') as file:
@@ -9,7 +13,7 @@ def read(filename):
 setup(name='KeralaPyApi',
       version='0.2.0',
       description='Python Telegram bot api. ',
-      long_description=read('README.md'),
+      long_description=long_description,
       long_description_content_type="text/markdown",
       author='Kerala Team',
       author_email='anandps002@gmail.com',
