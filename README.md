@@ -39,7 +39,7 @@ There are two ways to install the library:
 * Installation using pip (a Python package manager)*:
 
 ```
-$ pip install https://github.com/KeralaPyApi/KeralaPyApi/development.zip
+$ pip install KeralaPyApi
 ```
 * Installation from source (requires git):
 
