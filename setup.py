@@ -26,7 +26,7 @@ packages = find_packages(exclude=['logos*'])
 
 
 setup(name='KeralaPyApi',
-      version='0.2.0',
+      version='0.3.0',
       description='Python Telegram bot api. ',
       long_description=long_description,
       long_description_content_type="text/markdown",
