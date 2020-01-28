@@ -956,6 +956,21 @@ class bot:
         """
         return botapi.set_chat_title(self.token, chat_id, title)
 
+    def set_Administrator_title(self, chat_id, user_id, custom_title):
+        """
+        Use this method to change the Admin title in chat.
+        The bot must be an administrator in the chat for this to work and must have the appropriate admin rights.
+        Returns True on success.
+        Note: In regular groups (non-supergroups), this method will only work if the ‘All Members Are Admins’
+            setting is off in the target group.
+        :param chat_id: Int or Str: Unique identifier for the target chat or username of the target channel
+            (in the format @channelusername)
+        :param user_id: Int or Str: Unique identifier for a user.
+        :param custom_title: New Admin title, 1-255 characters, No emojis allowed
+        :return:
+        """
+        return botapi.set_Administrator_title(self.token, chat_id, user_id, custom_title)
+
     def set_chat_description(self, chat_id, description):
         """
         Use this method to change the description of a supergroup or a channel.
@@ -1670,6 +1685,9 @@ class AsyncKeralaBot(bot):
     @util.async_dec()
     def set_chat_title(self, *args):
         return bot.set_chat_title(self, *args)
+    @util.async_dec()
+    def set_Administrator_title(self, *args):
+        return bot.set_Administrator_title(self, *args)
 
     @util.async_dec()
     def set_chat_description(self, *args):
