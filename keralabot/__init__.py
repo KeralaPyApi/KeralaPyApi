@@ -23,7 +23,7 @@ logger.addHandler(console_output_handler)
 logger.setLevel(logging.ERROR)
 
 from keralabot import botapi, types, util
-__version__ = "1.0.2"
+__version__ = "2.0.2020"
 
 """
 Module : bot
@@ -123,6 +123,7 @@ class bot:
         setChatPhoto
         deleteChatPhoto
         setChatTitle
+        setChatAdministratorCustomTitle
         setChatDescription
         pinChatMessage
         unpinChatMessage
