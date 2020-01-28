@@ -576,6 +576,10 @@ def delete_chat_photo(token, chat_id):
     payload = {'chat_id': chat_id}
     return _make_request(token, method_url, params=payload, method='post')
 
+def set_Administrator_title(token, chat_id, user_id, custom_title):
+    method_url = 'setChatAdministratorCustomTitle'
+    payload = {'chat_id': chat_id, 'user_id': user_id, 'custom_title': custom_title}
+    return _make_request(token, method_url, params=payload, method='post')
 
 def set_chat_title(token, chat_id, title):
     method_url = 'setChatTitle'
