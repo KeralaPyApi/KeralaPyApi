@@ -1517,7 +1517,7 @@ class bot:
                     break
 
 
-class AsyncKeralaBot(bot):
+class AsyncBot(bot):
     def __init__(self, *args, **kwargs):
         bot.__init__(self, *args, **kwargs)
 
