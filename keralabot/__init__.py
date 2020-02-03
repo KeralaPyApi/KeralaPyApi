@@ -396,6 +396,8 @@ class bot:
 
     def __threaded_polling(self, none_stop=False, interval=0, timeout=3):
         logger.info('Started polling.')
+        logger.info("KeralaPyApi version {0} started".format(__version__))
+        logger.info("Licensed under GPLV3+ (c) <KeralaPyApi@gmail.com> KeralaPyApi.. ")
         self.__stop_polling.clear()
         error_interval = .25
 
