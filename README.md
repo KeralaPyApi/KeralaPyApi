@@ -37,7 +37,7 @@ Furthermore, you have basic knowledge of the Python programming language and mor
 The KeralaBot class (defined in \__init__.py) encapsulates all API calls in a single class. It provides functions such as `send_xyz` (`send_message`, `send_document` etc.) and several ways to listen for incoming messages.
 
 Create a file called `echo_bot.py`.
-Then, open the file and create an instance of the TeleBot class.
+Then, open the file and create an instance of the Bot class.
 ```python
 import keralabot
 
@@ -109,8 +109,8 @@ All [API methods](https://core.telegram.org/bots/api#available-methods) are loca
 Outlined below are some general use cases of the API.
 
 #### Message handlers
-A message handler is a function that is decorated with the `message_handler` decorator of a TeleBot instance. Message handlers consist of one or multiple filters.
-Each filter much return True for a certain message in order for a message handler to become eligible to handle that message. A message handler is declared in the following way (provided `bot` is an instance of TeleBot):
+A message handler is a function that is decorated with the `message_handler` decorator of a Bot instance. Message handlers consist of one or multiple filters.
+Each filter much return True for a certain message in order for a message handler to become eligible to handle that message. A message handler is declared in the following way (provided `bot` is an instance of Bot):
 ```python
 @bot.message_handler(filters)
 def function_name(message):
@@ -397,15 +397,15 @@ Refer [Bot Api](https://core.telegram.org/bots/api#messageentity) for extra deta
 
 ### Asynchronous delivery of messages
 There exists an implementation of TeleBot which executes all `send_xyz` and the `get_me` functions asynchronously. This can speed up you bot __significantly__, but it has unwanted side effects if used without caution.
-To enable this behaviour, create an instance of AsyncTeleBot instead of TeleBot.
+To enable this behaviour, create an instance of AsyncBot instead of Bot.
 ```python
-tb = bot.AsyncKeralaBot("TOKEN")
+tb = keralabot.AsyncBot("TOKEN")
 ```
 Now, every function that calls the Telegram API is executed in a separate Thread. The functions are modified to return an AsyncTask instance (defined in util.py). Using AsyncTeleBot allows you to do the following:
 ```python
 import keralabot
 
-tb = bot.AsyncKeralasBot("TOKEN")
+tb = keralabot.AsyncBot("TOKEN")
 task = tb.get_me() # Execute an API call
 # Do some other operations...
 a = 0
@@ -428,7 +428,7 @@ splitted_text = util.split_string(large_text, 3000)
 for text in splitted_text:
 	tb.send_message(chat_id, text)
 ```
-### Controlling the amount of Threads used by TeleBot
+### Controlling the amount of Threads used by Bot
 The keralasBot constructor takes the following optional arguments:
 
  - threaded: True/False (default True). A flag to indicate whether
