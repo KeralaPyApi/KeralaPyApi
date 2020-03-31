@@ -1689,7 +1689,7 @@ class AsyncBot(bot):
 
     @util.async_dec()
     async def set_chat_title(self, *args):
-        await return bot.set_chat_title(self, *args)
+        return await bot.set_chat_title(self, *args)
 
     @util.async_dec()
     async def set_Administrator_title(self, *args):
