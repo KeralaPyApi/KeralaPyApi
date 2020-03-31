@@ -1520,219 +1520,220 @@ class bot:
 
 
 class AsyncBot(bot):
-    def __init__(self, *args, **kwargs):
-        bot.__init__(self, *args, **kwargs)
+    async def __init__(self, *args, **kwargs):
+        await bot.__init__(self, *args, **kwargs)
 
     @util.async_dec()
-    def enable_save_next_step_handlers(self, delay=120, filename="./.handler-saves/step.save"):
-        return bot.enable_save_next_step_handlers(self, delay, filename)
+    asyn def enable_save_next_step_handlers(self, delay=120, filename="./.handler-saves/step.save"):
+        return await bot.enable_save_next_step_handlers(self, delay, filename)
 
     @util.async_dec()
-    def enable_save_reply_handlers(self, delay=120, filename="./.handler-saves/reply.save"):
-        return bot.enable_save_reply_handlers(self, delay, filename)
+    async def enable_save_reply_handlers(self, delay=120, filename="./.handler-saves/reply.save"):
+        return await bot.enable_save_reply_handlers(self, delay, filename)
 
     @util.async_dec()
-    def disable_save_next_step_handlers(self):
-        return bot.disable_save_next_step_handlers(self)
+    async def disable_save_next_step_handlers(self):
+        return await bot.disable_save_next_step_handlers(self)
 
     @util.async_dec()
-    def disable_save_reply_handlers(self):
-        return bot.enable_save_reply_handlers(self)
+    async def disable_save_reply_handlers(self):
+        return await bot.enable_save_reply_handlers(self)
 
     @util.async_dec()
-    def load_next_step_handlers(self, filename="./.handler-saves/step.save", del_file_after_loading=True):
-        return bot.load_next_step_handlers(self, filename, del_file_after_loading)
+    async def load_next_step_handlers(self, filename="./.handler-saves/step.save", del_file_after_loading=True):
+        return await bot.load_next_step_handlers(self, filename, del_file_after_loading)
 
     @util.async_dec()
-    def load_reply_handlers(self, filename="./.handler-saves/reply.save", del_file_after_loading=True):
-        return bot.load_reply_handlers(self, filename, del_file_after_loading)
+    async def load_reply_handlers(self, filename="./.handler-saves/reply.save", del_file_after_loading=True):
+        return await bot.load_reply_handlers(self, filename, del_file_after_loading)
 
     @util.async_dec()
-    def get_me(self):
-        return bot.get_me(self)
+    async def get_me(self):
+        return await bot.get_me(self)
 
     @util.async_dec()
-    def get_file(self, *args):
-        return bot.get_file(self, *args)
+    async def get_file(self, *args):
+        return await bot.get_file(self, *args)
 
     @util.async_dec()
-    def download_file(self, *args):
-        return bot.download_file(self, *args)
+    async def download_file(self, *args):
+        return await bot.download_file(self, *args)
 
     @util.async_dec()
-    def get_user_profile_photos(self, *args, **kwargs):
-        return bot.get_user_profile_photos(self, *args, **kwargs)
+    async def get_user_profile_photos(self, *args, **kwargs):
+        return await bot.get_user_profile_photos(self, *args, **kwargs)
 
     @util.async_dec()
-    def get_chat(self, *args):
-        return bot.get_chat(self, *args)
+    async def get_chat(self, *args):
+        return await bot.get_chat(self, *args)
 
     @util.async_dec()
-    def leave_chat(self, *args):
-        return bot.leave_chat(self, *args)
+    async def leave_chat(self, *args):
+        return await bot.leave_chat(self, *args)
 
     @util.async_dec()
-    def get_chat_administrators(self, *args):
-        return bot.get_chat_administrators(self, *args)
+    async def get_chat_administrators(self, *args):
+        return await bot.get_chat_administrators(self, *args)
 
     @util.async_dec()
-    def get_chat_members_count(self, *args):
-        return bot.get_chat_members_count(self, *args)
+    async def get_chat_members_count(self, *args):
+        return await bot.get_chat_members_count(self, *args)
 
     @util.async_dec()
-    def set_chat_sticker_set(self, *args):
-        return bot.set_chat_sticker_set(self, *args)
+    async def set_chat_sticker_set(self, *args):
+        return await bot.set_chat_sticker_set(self, *args)
 
     @util.async_dec()
-    def delete_chat_sticker_set(self, *args):
-        return bot.delete_chat_sticker_set(self, *args)
+    async def delete_chat_sticker_set(self, *args):
+        return await bot.delete_chat_sticker_set(self, *args)
 
     @util.async_dec()
-    def get_chat_member(self, *args):
-        return bot.get_chat_member(self, *args)
+    async def get_chat_member(self, *args):
+        return await bot.get_chat_member(self, *args)
 
     @util.async_dec()
-    def send_message(self, *args, **kwargs):
-        return bot.send_message(self, *args, **kwargs)
+    async def send_message(self, *args, **kwargs):
+        return await bot.send_message(self, *args, **kwargs)
 
     @util.async_dec()
-    def forward_message(self, *args, **kwargs):
-        return bot.forward_message(self, *args, **kwargs)
+    async def forward_message(self, *args, **kwargs):
+        return await bot.forward_message(self, *args, **kwargs)
 
     @util.async_dec()
-    def delete_message(self, *args):
-        return bot.delete_message(self, *args)
+    async def delete_message(self, *args):
+        return await bot.delete_message(self, *args)
 
     @util.async_dec()
-    def send_photo(self, *args, **kwargs):
-        return bot.send_photo(self, *args, **kwargs)
+    async def send_photo(self, *args, **kwargs):
+        return await bot.send_photo(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_audio(self, *args, **kwargs):
-        return bot.send_audio(self, *args, **kwargs)
+    async def send_audio(self, *args, **kwargs):
+        return await bot.send_audio(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_voice(self, *args, **kwargs):
-        return bot.send_voice(self, *args, **kwargs)
+    aaync def send_voice(self, *args, **kwargs):
+        return await bot.send_voice(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_document(self, *args, **kwargs):
-        return bot.send_document(self, *args, **kwargs)
+    async def send_document(self, *args, **kwargs):
+        return await bot.send_document(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_sticker(self, *args, **kwargs):
-        return bot.send_sticker(self, *args, **kwargs)
+    async def send_sticker(self, *args, **kwargs):
+        return await bot.send_sticker(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_video(self, *args, **kwargs):
-        return bot.send_video(self, *args, **kwargs)
+    async def send_video(self, *args, **kwargs):
+        return await bot.send_video(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_video_note(self, *args, **kwargs):
-        return bot.send_video_note(self, *args, **kwargs)
+    async def send_video_note(self, *args, **kwargs):
+        return await bot.send_video_note(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_media_group(self, *args, **kwargs):
-        return bot.send_media_group(self, *args, **kwargs)
+    async def send_media_group(self, *args, **kwargs):
+        return await bot.send_media_group(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_location(self, *args, **kwargs):
-        return bot.send_location(self, *args, **kwargs)
+    async def send_location(self, *args, **kwargs):
+        return await bot.send_location(self, *args, **kwargs)
 
     @util.async_dec()
-    def edit_message_live_location(self, *args, **kwargs):
-        return bot.edit_message_live_location(self, *args, **kwargs)
+    async def edit_message_live_location(self, *args, **kwargs):
+        return await bot.edit_message_live_location(self, *args, **kwargs)
 
     @util.async_dec()
-    def stop_message_live_location(self, *args, **kwargs):
-        return bot.stop_message_live_location(self, *args, **kwargs)
+    async def stop_message_live_location(self, *args, **kwargs):
+        return await bot.stop_message_live_location(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_venue(self, *args, **kwargs):
-        return bot.send_venue(self, *args, **kwargs)
+    async def send_venue(self, *args, **kwargs):
+        return await bot.send_venue(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_contact(self, *args, **kwargs):
-        return bot.send_contact(self, *args, **kwargs)
+    aaync def send_contact(self, *args, **kwargs):
+        return await bot.send_contact(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_chat_action(self, *args, **kwargs):
-        return bot.send_chat_action(self, *args, **kwargs)
+    async def send_chat_action(self, *args, **kwargs):
+        return await bot.send_chat_action(self, *args, **kwargs)
 
     @util.async_dec()
-    def kick_chat_member(self, *args, **kwargs):
-        return bot.kick_chat_member(self, *args, **kwargs)
+    async def kick_chat_member(self, *args, **kwargs):
+        return await bot.kick_chat_member(self, *args, **kwargs)
 
     @util.async_dec()
-    def unban_chat_member(self, *args):
-        return bot.unban_chat_member(self, *args)
+    async def unban_chat_member(self, *args):
+        return await bot.unban_chat_member(self, *args)
 
     @util.async_dec()
-    def restrict_chat_member(self, *args, **kwargs):
-        return bot.restrict_chat_member(self, *args, **kwargs)
+    async def restrict_chat_member(self, *args, **kwargs):
+        return await bot.restrict_chat_member(self, *args, **kwargs)
 
     @util.async_dec()
-    def promote_chat_member(self, *args, **kwargs):
-        return bot.promote_chat_member(self, *args, **kwargs)
+    async def promote_chat_member(self, *args, **kwargs):
+        return await bot.promote_chat_member(self, *args, **kwargs)
 
     @util.async_dec()
-    def export_chat_invite_link(self, *args):
-        return bot.export_chat_invite_link(self, *args)
+    async def export_chat_invite_link(self, *args):
+        return await bot.export_chat_invite_link(self, *args)
 
     @util.async_dec()
-    def set_chat_photo(self, *args):
-        return bot.set_chat_photo(self, *args)
+    async def set_chat_photo(self, *args):
+        return await bot.set_chat_photo(self, *args)
 
     @util.async_dec()
-    def delete_chat_photo(self, *args):
-        return bot.delete_chat_photo(self, *args)
+    async def delete_chat_photo(self, *args):
+        return await bot.delete_chat_photo(self, *args)
 
     @util.async_dec()
-    def set_chat_title(self, *args):
-        return bot.set_chat_title(self, *args)
-    @util.async_dec()
-    def set_Administrator_title(self, *args):
-        return bot.set_Administrator_title(self, *args)
+    async def set_chat_title(self, *args):
+        await return bot.set_chat_title(self, *args)
 
     @util.async_dec()
-    def set_chat_description(self, *args):
-        return bot.set_chat_description(self, *args)
+    async def set_Administrator_title(self, *args):
+        return await bot.set_Administrator_title(self, *args)
 
     @util.async_dec()
-    def pin_chat_message(self, *args, **kwargs):
-        return bot.pin_chat_message(self, *args, **kwargs)
+    async def set_chat_description(self, *args):
+        return await bot.set_chat_description(self, *args)
 
     @util.async_dec()
-    def unpin_chat_message(self, *args):
-        return bot.unpin_chat_message(self, *args)
+    async def pin_chat_message(self, *args, **kwargs):
+        return await bot.pin_chat_message(self, *args, **kwargs)
 
     @util.async_dec()
-    def edit_message_text(self, *args, **kwargs):
-        return bot.edit_message_text(self, *args, **kwargs)
+    async def unpin_chat_message(self, *args):
+        return await bot.unpin_chat_message(self, *args)
 
     @util.async_dec()
-    def edit_message_media(self, *args, **kwargs):
-        return bot.edit_message_media(self, *args, **kwargs)
+    async def edit_message_text(self, *args, **kwargs):
+        return await bot.edit_message_text(self, *args, **kwargs)
 
     @util.async_dec()
-    def edit_message_reply_markup(self, *args, **kwargs):
-        return bot.edit_message_reply_markup(self, *args, **kwargs)
+    aaync def edit_message_media(self, *args, **kwargs):
+        return await bot.edit_message_media(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_game(self, *args, **kwargs):
-        return bot.send_game(self, *args, **kwargs)
+    async def edit_message_reply_markup(self, *args, **kwargs):
+        return await bot.edit_message_reply_markup(self, *args, **kwargs)
 
     @util.async_dec()
-    def set_game_score(self, *args, **kwargs):
-        return bot.set_game_score(self, *args, **kwargs)
+    async def send_game(self, *args, **kwargs):
+        return await bot.send_game(self, *args, **kwargs)
 
     @util.async_dec()
-    def get_game_high_scores(self, *args, **kwargs):
-        return bot.get_game_high_scores(self, *args, **kwargs)
+    async def set_game_score(self, *args, **kwargs):
+        return await bot.set_game_score(self, *args, **kwargs)
 
     @util.async_dec()
-    def send_invoice(self, *args, **kwargs):
-        return bot.send_invoice(self, *args, **kwargs)
+    async def get_game_high_scores(self, *args, **kwargs):
+        return await bot.get_game_high_scores(self, *args, **kwargs)
+
+    @util.async_dec()
+    async def send_invoice(self, *args, **kwargs):
+        return await bot.send_invoice(self, *args, **kwargs)
 
     @util.async_dec()
     def answer_shipping_query(self, *args, **kwargs):
@@ -1751,8 +1752,8 @@ class AsyncBot(bot):
         return bot.answer_inline_query(self, *args, **kwargs)
 
     @util.async_dec()
-    def answer_callback_query(self, *args, **kwargs):
-        return bot.answer_callback_query(self, *args, **kwargs)
+    async def answer_callback_query(self, *args, **kwargs):
+        return await bot.answer_callback_query(self, *args, **kwargs)
 
     @util.async_dec()
     def send_sticker(self, *args, **kwargs):
