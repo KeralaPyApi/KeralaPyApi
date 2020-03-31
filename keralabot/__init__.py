@@ -1524,7 +1524,7 @@ class AsyncBot(bot):
         await bot.__init__(self, *args, **kwargs)
 
     @util.async_dec()
-    asyn def enable_save_next_step_handlers(self, delay=120, filename="./.handler-saves/step.save"):
+    async def enable_save_next_step_handlers(self, delay=120, filename="./.handler-saves/step.save"):
         return await bot.enable_save_next_step_handlers(self, delay, filename)
 
     @util.async_dec()
@@ -1612,7 +1612,7 @@ class AsyncBot(bot):
         return await bot.send_audio(self, *args, **kwargs)
 
     @util.async_dec()
-    aaync def send_voice(self, *args, **kwargs):
+    async def send_voice(self, *args, **kwargs):
         return await bot.send_voice(self, *args, **kwargs)
 
     @util.async_dec()
@@ -1652,7 +1652,7 @@ class AsyncBot(bot):
         return await bot.send_venue(self, *args, **kwargs)
 
     @util.async_dec()
-    aaync def send_contact(self, *args, **kwargs):
+    async def send_contact(self, *args, **kwargs):
         return await bot.send_contact(self, *args, **kwargs)
 
     @util.async_dec()
@@ -1712,7 +1712,7 @@ class AsyncBot(bot):
         return await bot.edit_message_text(self, *args, **kwargs)
 
     @util.async_dec()
-    aaync def edit_message_media(self, *args, **kwargs):
+    async def edit_message_media(self, *args, **kwargs):
         return await bot.edit_message_media(self, *args, **kwargs)
 
     @util.async_dec()
