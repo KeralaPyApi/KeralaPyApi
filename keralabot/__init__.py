@@ -8,6 +8,7 @@ import re
 import sys
 import threading
 import time
+import asyncio
 
 import six
 
@@ -49,30 +50,30 @@ class Saver:
     Class for saving (next step|reply) handlers
     """
 
-    def __init__(self, handlers, filename, delay):
+    async def __init__(self, handlers, filename, delay):
         self.handlers = handlers
         self.filename = filename
         self.delay = delay
         self.timer = threading.Timer(delay, self.save_handlers)
 
-    def start_save_timer(self):
+    async def start_save_timer(self):
         if not self.timer.is_alive():
             if self.delay <= 0:
-                self.save_handlers()
+                await self.save_handlers()
             else:
                 self.timer = threading.Timer(self.delay, self.save_handlers)
-                self.timer.start()
+                await self.timer.start()
 
-    def save_handlers(self):
-        self.dump_handlers(self.handlers, self.filename)
+    async def save_handlers(self):
+        await self.dump_handlers(self.handlers, self.filename)
 
-    def load_handlers(self, filename, del_file_after_loading=True):
-        tmp = self.return_load_handlers(filename, del_file_after_loading=del_file_after_loading)
+    async def load_handlers(self, filename, del_file_after_loading=True):
+        tmp = await self.return_load_handlers(filename, del_file_after_loading=del_file_after_loading)
         if tmp is not None:
-            self.handlers.update(tmp)
+            await self.handlers.update(tmp)
 
     @staticmethod
-    def dump_handlers(handlers, filename, file_mode="wb"):
+    async def dump_handlers(handlers, filename, file_mode="wb"):
         dirs = filename.rsplit('/', maxsplit=1)[0]
         os.makedirs(dirs, exist_ok=True)
 
@@ -85,7 +86,7 @@ class Saver:
         os.rename(filename + ".tmp", filename)
 
     @staticmethod
-    def return_load_handlers(filename, del_file_after_loading=True):
+    async def return_load_handlers(filename, del_file_after_loading=True):
         if os.path.isfile(filename) and os.path.getsize(filename) > 0:
             with open(filename, "rb") as file:
                 handlers = pickle.load(file)
@@ -136,7 +137,7 @@ class bot:
         answerInlineQuery
         """
 
-    def __init__(self, token, threaded=True, skip_pending=False, num_threads=2):
+    async def __init__(self, token, threaded=True, skip_pending=False, num_threads=2):
         """
         :param token: bot API token
         :return: bot object.
@@ -173,37 +174,37 @@ class bot:
         if self.threaded:
             self.worker_pool = util.ThreadPool(num_threads=num_threads)
 
-    def enable_save_next_step_handlers(self, delay=120, filename="./.handler-saves/step.save"):
+    async def enable_save_next_step_handlers(self, delay=120, filename="./.handler-saves/step.save"):
         """
         Enable saving next step handlers (by default saving disable)
 
         :param delay: Delay between changes in handlers and saving
         :param filename: Filename of save file
         """
-        self.next_step_saver = Saver(self.next_step_handlers, filename, delay)
+        self.next_step_saver = await Saver(self.next_step_handlers, filename, delay)
 
-    def enable_save_reply_handlers(self, delay=120, filename="./.handler-saves/reply.save"):
+    async def enable_save_reply_handlers(self, delay=120, filename="./.handler-saves/reply.save"):
         """
         Enable saving reply handlers (by default saving disable)
 
         :param delay: Delay between changes in handlers and saving
         :param filename: Filename of save file
         """
-        self.reply_saver = Saver(self.reply_handlers, filename, delay)
+        self.reply_saver = await Saver(self.reply_handlers, filename, delay)
 
-    def disable_save_next_step_handlers(self):
+    async def disable_save_next_step_handlers(self):
         """
         Disable saving next step handlers (by default saving disable)
         """
         self.next_step_saver = None
 
-    def disable_save_reply_handlers(self):
+    async def disable_save_reply_handlers(self):
         """
         Disable saving next step handlers (by default saving disable)
         """
         self.reply_saver = None
 
-    def load_next_step_handlers(self, filename="./.handler-saves/step.save", del_file_after_loading=True):
+    async def load_next_step_handlers(self, filename="./.handler-saves/step.save", del_file_after_loading=True):
         """
         Load next step handlers from save file
 
@@ -212,7 +213,7 @@ class bot:
         """
         self.next_step_saver.load_handlers(filename, del_file_after_loading)
 
-    def load_reply_handlers(self, filename="./.handler-saves/reply.save", del_file_after_loading=True):
+    async def load_reply_handlers(self, filename="./.handler-saves/reply.save", del_file_after_loading=True):
         """
         Load reply handlers from save file
 
@@ -221,24 +222,24 @@ class bot:
         """
         self.reply_saver.load_handlers(filename)
 
-    def set_webhook(self, url=None, certificate=None, max_connections=None, allowed_updates=None):
+    async def set_webhook(self, url=None, certificate=None, max_connections=None, allowed_updates=None):
         return botapi.set_webhook(self.token, url, certificate, max_connections, allowed_updates)
 
-    def delete_webhook(self):
+    async def delete_webhook(self):
         """
         Use this method to remove webhook integration if you decide to switch back to getUpdates.
         :return: bool
         """
         return botapi.delete_webhook(self.token)
 
-    def get_webhook_info(self):
+    await def get_webhook_info(self):
         result = botapi.get_webhook_info(self.token)
         return types.WebhookInfo.de_json(result)
 
-    def remove_webhook(self):
-        return self.set_webhook()  # No params resets webhook
+    async def remove_webhook(self):
+        return await self.set_webhook()  # No params resets webhook
 
-    def get_updates(self, offset=None, limit=None, timeout=20, allowed_updates=None):
+    async def get_updates(self, offset=None, limit=None, timeout=20, allowed_updates=None):
         """
         Use this method to receive incoming updates using long polling (wiki). An Array of Update objects is returned.
         :param allowed_updates: Array of string. List the types of updates you want your bot to receive.
@@ -253,7 +254,7 @@ class bot:
             ret.append(types.Update.de_json(ju))
         return ret
 
-    def __skip_updates(self):
+    async def __skip_updates(self):
         """
         Get and discard all pending updates before first poll of the bot
         :return: total updates skipped
@@ -268,7 +269,7 @@ class bot:
             updates = self.get_updates(offset=self.last_update_id + 1, timeout=1)
         return total
 
-    def __retrieve_updates(self, timeout=20):
+    async def __retrieve_updates(self, timeout=20):
         """
         Retrieves any updates from the Telegram API.
         Registered listeners and applicable message handlers will be notified when a new message arrives.
@@ -280,7 +281,7 @@ class bot:
         updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
         self.process_new_updates(updates)
 
-    def process_new_updates(self, updates):
+    async def process_new_updates(self, updates):
         new_messages = []
         edited_new_messages = []
         new_channel_posts = []
@@ -333,22 +334,22 @@ class bot:
         if len(new_shipping_querys) > 0:
             self.process_new_shipping_query(new_shipping_querys)
 
-    def process_new_messages(self, new_messages):
+    async def process_new_messages(self, new_messages):
         self._notify_next_handlers(new_messages)
         self._notify_reply_handlers(new_messages)
         self.__notify_update(new_messages)
         self._notify_command_handlers(self.message_handlers, new_messages)
 
-    def process_new_edited_messages(self, edited_message):
+    async def process_new_edited_messages(self, edited_message):
         self._notify_command_handlers(self.edited_message_handlers, edited_message)
 
-    def process_new_channel_posts(self, channel_post):
+    async def process_new_channel_posts(self, channel_post):
         self._notify_command_handlers(self.channel_post_handlers, channel_post)
 
-    def process_new_edited_channel_posts(self, edited_channel_post):
+    async def process_new_edited_channel_posts(self, edited_channel_post):
         self._notify_command_handlers(self.edited_channel_post_handlers, edited_channel_post)
 
-    def process_new_inline_query(self, new_inline_querys):
+    async def process_new_inline_query(self, new_inline_querys):
         self._notify_command_handlers(self.inline_handlers, new_inline_querys)
 
     def process_new_chosen_inline_query(self, new_chosen_inline_querys):
@@ -376,7 +377,7 @@ class bot:
                 pass
         logger.info("Break infinity polling")
 
-    def polling(self, none_stop=False, interval=0, timeout=20):
+    async def polling(self, none_stop=False, interval=0, timeout=20):
         """
         This function creates a new Thread that calls an internal __retrieve_updates function.
         This allows the bot to retrieve Updates automagically and notify listeners and message handlers accordingly.
