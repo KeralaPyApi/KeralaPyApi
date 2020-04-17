@@ -16,7 +16,7 @@ Welcome to KeralaPyApi
 .. toctree::
     :hidden:
     :caption: Message Handler
-    message/boundmethod
+    message/boundmethods
     message/filters
     message/boundtypes
 
