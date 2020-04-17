@@ -13,6 +13,13 @@ Welcome to KeralaPyApi
     :hidden:
     :caption: Getting Started
 
+.. toctree::
+    :hidden:
+    :caption: Message Handler
+    message/boundmethod
+    message/filters
+    message/boundtypes
+
 .. raw:: html
 
     <div align="center">
