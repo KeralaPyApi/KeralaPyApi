@@ -9,7 +9,7 @@ from pygments.styles.friendly import FriendlyStyle
 FriendlyStyle.background_color = "#f3f2f1"
 
 project = "KeralaPyApi"
-copyright = "2019-2021, Mario"
+copyright = "2019-2020, Mario"
 author = "Mario"
 
 extensions = [
