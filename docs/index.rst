@@ -17,7 +17,7 @@ Welcome to KeralaPyApi
 
     <div align="center">
         <a href="/">
-            <div><img src="_imgs/KeralaPyApi.jpg" alt="KeralaPyApi Logo" width="420"></div>
+            <div><img src="https://raw.githubusercontent.com/KeralaPyApi/KeralaPyApi/master/docs/_imgs/KeralaPyApi.jpg" alt="KeralaPyApi Logo" width="420"></div>
         </a>
     </div>
 
