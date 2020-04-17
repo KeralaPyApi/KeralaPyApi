@@ -27,7 +27,7 @@ Bleeding Edge
 Keralapyapi is always evolving, although new releases on PyPI are published only when enough changes are added, but this
 doesn't mean you can't try new features right now!
 
-In case you'd like to try out the latest KeralaPyApi features, the `GitHub repo`_ is always kept updated with new changes;
+In case you'd like to try out the latest KeralaPyApi features, the `GitHub repo` is always kept updated with new changes;
 you can install the development version straight from the ``development`` branch using this command (note "development.zip" in
 the link):
 
