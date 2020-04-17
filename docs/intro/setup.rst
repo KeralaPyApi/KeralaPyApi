@@ -7,5 +7,5 @@ project with the library. Let's see how it's done.
 API Keys
 --------
 
-It is presumed that you [have obtained an API token with @BotFather](https://core.telegram.org/bots#botfather). We will call this token `TOKEN`.
-Furthermore, you have basic knowledge of the Python programming language and more importantly [the Telegram Bot API](https://core.telegram.org/bots/api).
+It is presumed that you have obtained an API token with https://core.telegram.org/bots#botfather. We will call this token `TOKEN`.
+Furthermore, you have basic knowledge of the Python programming language and more importantly the Telegram Bot API visit https://core.telegram.org/bots/api.
