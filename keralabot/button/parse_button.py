@@ -6,6 +6,9 @@ import emoji
 from keralabot.button.message import MessageEntity
 from keralabot.button.base import escape_markdown
 
+from keralabot.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+
 # NOTE: the url \ escape may cause double escapes
 # match * (bold) (don't escape if in url)
 # match _ (italics) (don't escape if in url)
@@ -256,3 +259,25 @@ def extract_time(message, time_val):
     else:
         message.reply_text("Invalid time type specified. Expected m,h, or d, got: {}".format(time_val[-1]))
         return ""
+
+
+def build_keyboard(buttons):
+    keyb = []
+    for btn in buttons:
+        if btn.same_line and keyb:
+            keyb[-1].append(InlineKeyboardButton(btn.name, url=btn.url))
+        else:
+            keyb.append([InlineKeyboardButton(btn.name, url=btn.url)])
+
+    return keyb
+
+
+def revert_buttons(buttons):
+    res = ""
+    for btn in buttons:
+        if btn.same_line:
+            res += "\n[{}](buttonurl://{}:same)".format(btn.name, btn.url)
+        else:
+            res += "\n[{}](buttonurl://{})".format(btn.name, btn.url)
+
+    return res
