@@ -1,5 +1,5 @@
-from keralabot.button.base import TelegramObject
-from keralabot.button.user import User
+from keralabot.button_base import TelegramObject
+from keralabot.user import User
 
 
 class MessageEntity(TelegramObject):
