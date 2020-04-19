@@ -3,8 +3,8 @@ import time
 from typing import Dict, List
 
 import emoji
-from keralabot.button.message import MessageEntity
-from keralabot.button.base import escape_markdown
+from keralabot.button_message import MessageEntity
+from keralabot.button_base import escape_markdown
 
 from keralabot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
