@@ -1,4 +1,4 @@
-from keralabot.button_base import TelegramObject
+from keralabot.buttonbase import TelegramObject
 from keralabot.user import User
 
 
