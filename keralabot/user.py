@@ -1,4 +1,4 @@
-from keralabot.button_base import TelegramObject
+from keralabot.buttonbase import TelegramObject
 
 class User(TelegramObject):
     """This object represents a Telegram user or bot.
